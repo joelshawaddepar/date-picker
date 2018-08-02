@@ -32,6 +32,7 @@ class App extends Component {
 	        	<AddeDatePicker
 		          startDate=''
 		          endDate=''
+              placeholder='Select Date'
 		        />
         	</div>
         </div>

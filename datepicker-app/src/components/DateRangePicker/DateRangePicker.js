@@ -30,36 +30,36 @@ export default class DateRangePicker extends React.Component {
   render() {
     const { selectedStartDay, selectedEndDay } = this.state;
     return (
-      <div className='dateRangePicker'>
+
+      <div className="dateRangePicker adde-date-range">
         <div className="dateRangePicker-quicklinks">
           <button className="button-text">YTD</button>
           <button className="button-text">MTD</button>
           <button className="button-text">WTD</button>
         </div>
-        <div className="dateRangePicker-content">
-          <div className='date-picker-wrapper'>
-            <label className="input-label">Start Date</label>
 
-            <input type="text" value={this.state.selectedStartDay}/>
+        <section className="body">
+          <div className="start-date">
+            <label className="input-label">Start Date</label>
+            <input type="text" className="adde-text-input" value={this.state.selectedStartDay}/>
 
             <DayPicker
               selectedDays={this.state.selectedStartDay}
               onDayClick={this.selectedStartDay}
             />
-
           </div>
 
-          <div className='date-picker-wrapper'>
-          <label className="input-label">End Date</label>
-          <input type="text" value={this.state.selectedEndDay}/>
+          <div className="end-date">
+            <label className="input-label">End Date</label>
+            <input type="text" className="adde-text-input" value={this.state.selectedEndDay}/>
 
             <DayPicker
               selectedDays={this.state.selectedEndDay}
               onDayClick={this.selectedEndDay}
             />
           </div>
+        </section>
 
-        </div>
         <footer className="cta-footer">
           <button className="button-primary">Apply</button>
           <button className="button-default">Cancel</button>
