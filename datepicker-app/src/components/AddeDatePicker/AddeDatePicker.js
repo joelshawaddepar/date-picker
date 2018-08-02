@@ -5,63 +5,18 @@ import AdvancedMode from '../AdvancedMode/AdvancedMode';
 import DateRangePicker from '../DateRangePicker/DateRangePicker';
 import Input from '../Input/Input';
 
-const suggestions = [];
+import {
+  dateRangeBuilder,
+  dateBuilder,
+  getLastDate,
+  momentBuilder,
+} from '../../utils/dates';
 
-// https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions#Using_Special_Characters
-function escapeRegexCharacters(str) {
-  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-
-function getSuggestions(value) {
-  const escapedValue = escapeRegexCharacters(value.trim());
-  
-  if (escapedValue === '') {
-    return [];
-  }
-
-  const regex = new RegExp('^' + escapedValue, 'i');
-
-  return suggestions.filter(suggestion => regex.test(suggestion));
-}
-
-function getSuggestionValue(suggestion) {
-  return suggestion;
-}
-
-function renderSuggestion(suggestion) {
-  return (
-    <span>{suggestion}</span>
-  );
-}
-
-const dateRangeBuilder = (startDate, endDate) => {
-  if (!startDate || !endDate) return '';
-  return `${startDate} - ${endDate}`;
-};
-
-const dateBuilder = (dateObject) => {
-  return `${dateObject.getMonth() + 1 }/${dateObject.getDate()}/${dateObject.getFullYear()}`;
-};
-
-const getLastDate = (dateObject, dateType) => {
-  let result;
-  switch (dateType) {
-    case 'month':
-      result = new Date(dateObject.getFullYear(), dateObject.getMonth(), 0);
-      debugger;
-      return dateBuilder(result);
-    case 'quarter':
-      return;
-    case 'year':
-      result = new Date(dateObject.getFullYear(), 0, 0);
-      return dateBuilder(result);
-  }
-}
-
-// return the first day of the date range
-const momentBuilder = (endate, period, dateType) => {
-  return moment(endate, 'MM/DD/YYYY').subtract(period, dateType).format('L');
-};
+import {
+  getSuggestions,
+  getSuggestionValue,
+  renderSuggestion,
+} from '../../utils/autosuggestions';
 
 const todayObject = new Date();
 const dateOfToday = dateBuilder(todayObject);
@@ -76,10 +31,13 @@ class AddeDatePicker extends Component {
       startDate: '',
       endDate: '',
       suggestions: [],
+      value: '',
+      commandValue: '',
     };
 
     this.onFocusHandler = this.onFocusHandler.bind(this);
     this.onBlurHandler = this.onBlurHandler.bind(this);
+    this.onChangeHandler = this.onChangeHandler.bind(this);
   }
 
   renderDateRangePicker() {
@@ -104,9 +62,10 @@ class AddeDatePicker extends Component {
   }
 
   onBlurHandler(e) {
+    if (!this.state.showAdvancedMode) return;
     const input = e.target.value;
     // Simple logic for now
-    if(input.includes('/')) {
+    if (input.includes('/')) {
       return;
     }
 
@@ -117,6 +76,8 @@ class AddeDatePicker extends Component {
         showAdvancedMode: false,
         startDate: dateOfToday,
         endDate: dateOfToday,
+        commandValue: '',
+        value: dateRangeBuilder(dateOfToday, dateOfToday),
       });
     } else if (dates.length === 1) {
       const date = dates[0];
@@ -211,11 +172,24 @@ class AddeDatePicker extends Component {
 
   onChangeHandler(e) {
     const value = e.target.value;
-    if (value === '=' && !this.state.showAdvancedMode) {
+    const { showAdvancedMode, showDateRangePicker } = this.state;
+
+    if (value === '=' && !showAdvancedMode) {
       this.setState({
         showDateRangePicker: false,
         showAdvancedMode: true,
+        startDate: '',
+        endDate: '',
+        commandValue: '',
         value: '',
+      });
+    } else if (showDateRangePicker) {
+      this.setState({
+        value,
+      });
+    } else if (showAdvancedMode) {
+      this.setState({
+        commandValue: value,
       });
     }
   }
@@ -233,12 +207,19 @@ class AddeDatePicker extends Component {
   };
 
   render() {
-    const { startDate, endDate, suggestions } = this.state;
+    const { startDate, endDate, suggestions, commandValue, value } = this.state;
+    let inputValue;
+    if(this.state.AdvancedMode) {
+      inputValue = commandValue;
+    } else {
+      inputValue = value;
+    }
+
     return (
       <div className='addeDatePicker'>
         <div>
           <Input
-            value={dateRangeBuilder(startDate, endDate)}
+            value={inputValue}
             onFocus={this.onFocusHandler}
             onBlur={this.onBlurHandler}
             onChange={this.onChangeHandler}
