@@ -4,14 +4,20 @@ import Autosuggest from 'react-autosuggest';
 class Input extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      suggestions: []
-    }
   }
 
   render() {
-    const { value, onFocus, onBlur, onChange } = this.props;
+    const {
+      value,
+      onFocus,
+      onBlur,
+      onChange,
+      suggestions,
+      onSuggestionsFetchRequested,
+      onSuggestionsClearRequested,
+      getSuggestionValue,
+      renderSuggestion,
+    } = this.props;
     const inputProps = {
       value,
       onFocus,
@@ -22,7 +28,11 @@ class Input extends Component {
     return (
       <div className='input'>
         <Autosuggest
-          suggestions={this.state.suggestions}
+          suggestions={suggestions}
+          onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={onSuggestionsClearRequested}
+          getSuggestionValue={getSuggestionValue}
+          renderSuggestion={renderSuggestion}
           inputProps={inputProps}
         />
       </div>
