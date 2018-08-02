@@ -419,9 +419,7 @@ label[class^=button-] {
   height: 24px;
 }
 
-.addeDatePicker .dateRangePicker > .start-date input,
-.addeDatePicker .dateRangePicker > .end-date input, .addeDatePicker .dateRangePicker > .start-date label,
-.addeDatePicker .dateRangePicker > .end-date label, .addeDatePicker .input input {
+.addeDatePicker .dateRangePicker .date-picker-wrapper input, .addeDatePicker .dateRangePicker .date-picker-wrapper label, .addeDatePicker .input input {
   font-size: 14px;
   line-height: 1.33;
 }
@@ -430,45 +428,54 @@ label[class^=button-] {
   display: inline-block;
 }
 .addeDatePicker .dateRangePicker {
-  display: flex;
-  width: 600px;
+  width: 620px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
-.addeDatePicker .dateRangePicker > .start-date,
-.addeDatePicker .dateRangePicker > .end-date {
-  width: 50%;
-  text-align: left;
+.addeDatePicker .dateRangePicker .dateRangePicker-content {
+  display: flex;
+}
+.addeDatePicker .dateRangePicker .dateRangePicker-quicklinks {
+  padding-top: 8px;
+}
+.addeDatePicker .dateRangePicker .date-picker-wrapper {
   padding: 16px;
 }
-.addeDatePicker .dateRangePicker > .start-date label,
-.addeDatePicker .dateRangePicker > .end-date label {
-  color: #ccc;
-  display: block;
+.addeDatePicker .dateRangePicker .date-picker-wrapper label {
+  color: #666;
+  margin-bottom: 2px;
+  font-size: 12px;
+  font-weight: 500;
 }
-.addeDatePicker .dateRangePicker > .start-date input,
-.addeDatePicker .dateRangePicker > .end-date input {
-  display: block;
-}
-.addeDatePicker .dateRangePicker > .start-date .DayPickerInput,
-.addeDatePicker .dateRangePicker > .end-date .DayPickerInput {
-  display: block;
-}
-.addeDatePicker .dateRangePicker > .start-date .DayPickerInput .DayPickerInput-OverlayWrapper,
-.addeDatePicker .dateRangePicker > .end-date .DayPickerInput .DayPickerInput-OverlayWrapper {
+.addeDatePicker .dateRangePicker .date-picker-wrapper input {
+  display: inline-block;
   width: 100%;
 }
-.addeDatePicker .dateRangePicker > .start-date .DayPickerInput .DayPickerInput-Overlay,
-.addeDatePicker .dateRangePicker > .end-date .DayPickerInput .DayPickerInput-Overlay {
+.addeDatePicker .dateRangePicker .date-picker-wrapper .DayPickerInput {
+  display: block;
+}
+.addeDatePicker .dateRangePicker .date-picker-wrapper .DayPickerInput .DayPickerInput-OverlayWrapper {
+  width: 100%;
+}
+.addeDatePicker .dateRangePicker .date-picker-wrapper .DayPickerInput .DayPickerInput-Overlay {
   box-shadow: none;
   width: 100%;
   position: relative;
 }
-.addeDatePicker .dateRangePicker > .start-date .DayPickerInput .DayPicker-Month,
-.addeDatePicker .dateRangePicker > .end-date .DayPickerInput .DayPicker-Month {
+.addeDatePicker .dateRangePicker .date-picker-wrapper .DayPickerInput .DayPicker-Month {
   margin: 24px 0 0;
 }
 .addeDatePicker .dateRangePicker .cta-footer {
-  width: 100%;
+  padding: 16px;
+  text-align: right;
+  border-top: 1px #ccc solid;
+}
+.addeDatePicker .dateRangePicker .cta-footer button {
+  margin-left: 8px;
+}
+
+.button-text {
+  color: #4A90E2;
+  min-width: 50px;
 }
 
 .home {

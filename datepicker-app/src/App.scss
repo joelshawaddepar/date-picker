@@ -20,25 +20,34 @@
   }
 
   .dateRangePicker {
-    display: flex;
-    width: 600px;
+    width: 620px;
     box-shadow: 0 2px 4px rgba(0,0,0, 0.2);
 
-    > .start-date,
-    > .end-date {
-      width: 50%;
-      text-align: left;
+    .dateRangePicker-content {
+      display: flex;
+    }
+
+
+    .dateRangePicker-quicklinks {
+      padding-top: 8px;
+    }
+
+
+    .date-picker-wrapper {
       padding: $spacing-double;
 
       label  {
         @extend %body-font-styling;
-        color: #ccc;
-        display: block;
+        color: #666;
+        margin-bottom: 2px;
+        font-size: 12px;
+        font-weight: 500;
       }
 
       input {
         @extend %body-font-styling;
-        display: block;
+        display: inline-block;
+        width: 100%;
       }
 
       .DayPickerInput {
@@ -61,9 +70,20 @@
     }
 
     .cta-footer {
-      width: 100%;
+      padding: 16px;
+      text-align: right;
+      border-top: 1px #ccc solid;
+
+      button {
+        margin-left: 8px;
+      }
     }
   }
+}
+
+.button-text {
+  color: #4A90E2;
+  min-width: 50px;
 }
 
 .home {
