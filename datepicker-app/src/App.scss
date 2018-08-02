@@ -18,11 +18,18 @@
       @extend %body-font-styling;
     }
   }
+}
 
-  .dateRangePicker {
+// Range Picker
+.adde-date-range {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  box-shadow: 0 2px 4px rgba(0,0,0, 0.2);
+
+  // Main Section of the Range Picker
+  .body {
     display: flex;
-    width: 600px;
-    box-shadow: 0 2px 4px rgba(0,0,0, 0.2);
 
     > .start-date,
     > .end-date {
@@ -41,27 +48,37 @@
         display: block;
       }
 
-      .DayPickerInput {
+      .DayPickerInput,
+      .DayPicker {
         display: block;
+      }
 
-        .DayPickerInput-OverlayWrapper {
-          width: 100%;
-        }
+      .DayPicker-Month,
+      .DayPickerInput-Overlay,
+      .DayPickerInput-OverlayWrapper {
+        width: 100%;
+      }
 
-        .DayPickerInput-Overlay {
-          box-shadow: none;
-          width: 100%;
-          position: relative;
-        }
+      .DayPicker-Month {
+        margin: $spacing-triple 0 0;
+      }
 
-        .DayPicker-Month {
-          margin: $spacing-triple 0 0;
-        }
+      .DayPickerInput-Overlay {
+        box-shadow: none;
+        position: relative;
       }
     }
+  }
 
-    .cta-footer {
-      width: 100%;
+  // Footer for buttons
+  .cta-footer {
+    width: 100%;
+    box-sizing: border-box;
+    border-top: $global-border-style;
+    padding: $spacing-double;
+
+    button:not(:last-child) {
+      margin-right: $spacing-double;
     }
   }
 }

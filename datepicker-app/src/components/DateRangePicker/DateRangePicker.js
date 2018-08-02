@@ -17,26 +17,28 @@ export default class DateRangePicker extends React.Component {
   render() {
     const { selectedDay } = this.state;
     return (
-      <div className='dateRangePicker'>
-        <div className='start-date'>
-          <label>Start Date</label>
+      <div className='dateRangePicker adde-date-range'>
+        <section className='body'>
+          <div className='start-date'>
+            <label>Start Date</label>
+            <DayPickerInput
+              onDayChange={this.handleDayChange}
+              showOverlay={true}
+              hideOnDayClick={false}
+              showDayPicker={true}
+            />
+          </div>
+
+          <div className='end-date'>
+          <label>End Date</label>
           <DayPickerInput
             onDayChange={this.handleDayChange}
             showOverlay={true}
             hideOnDayClick={false}
             showDayPicker={true}
           />
-        </div>
-
-        <div className='end-date'>
-        <label>End Date</label>
-        <DayPickerInput
-          onDayChange={this.handleDayChange}
-          showOverlay={true}
-          hideOnDayClick={false}
-          showDayPicker={true}
-        />
-        </div>
+          </div>
+        </section>
 
         <footer className="cta-footer">
           <button className="button-primary">Apply</button>
