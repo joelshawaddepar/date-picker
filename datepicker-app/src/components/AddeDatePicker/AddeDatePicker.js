@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import AdvancedMode from '../AdvancedMode/AdvancedMode';
 import DateRangePicker from '../DateRangePicker/DateRangePicker';
-import Input from './Input';
+import Input from '../Input/Input';
 
 class AddeDatePicker extends Component {
   constructor(props) {
