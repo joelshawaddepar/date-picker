@@ -7,7 +7,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <AddeDatePicker />
+        <AddeDatePicker
+          startDate=''
+          endDate=''
+        />
       </div>
     );
   }

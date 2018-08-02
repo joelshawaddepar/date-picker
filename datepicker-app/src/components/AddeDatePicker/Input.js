@@ -8,9 +8,11 @@ class Input extends Component {
   render() {
     return (
       <div className='input'>
-        <input 
+        <input
+          value={this.props.value}
           onFocus={this.props.onFocus}
           onBlur={this.props.onBlur}
+          onChange={this.props.onChange}
         />
       </div>
     );
