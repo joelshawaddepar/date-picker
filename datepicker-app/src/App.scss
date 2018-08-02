@@ -12,7 +12,6 @@
   line-height: $line-height-large;
 }
 
-
 .addeDatePicker {
   // container div for the main input
   .input {
@@ -22,21 +21,76 @@
       @extend %body-font-styling;
     }
   }
-
-  
 }
 
-.dateRangePicker {
-    width: 620px;
-    box-shadow: 0 2px 4px rgba(0,0,0, 0.2);
+// Range Picker
+.adde-date-range {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  box-shadow: 0 2px 4px rgba(0,0,0, 0.2);
 
   .dateRangePicker-content {
     display: flex;
   }
 
-
   .dateRangePicker-quicklinks {
     padding-top: 8px;
+  }
+
+  // Main Section of the Range Picker
+  .body {
+    display: flex;
+
+    > .start-date,
+    > .end-date {
+      width: 50%;
+      text-align: left;
+      padding: $spacing-double;
+
+      label  {
+        @extend %body-font-styling;
+        color: #ccc;
+        display: block;
+      }
+
+      input {
+        @extend %body-font-styling;
+        display: block;
+      }
+
+      .DayPickerInput,
+      .DayPicker {
+        display: block;
+      }
+
+      .DayPicker-Month,
+      .DayPickerInput-Overlay,
+      .DayPickerInput-OverlayWrapper {
+        width: 100%;
+      }
+
+      .DayPicker-Month {
+        margin: $spacing-triple 0 0;
+      }
+
+      .DayPickerInput-Overlay {
+        box-shadow: none;
+        position: relative;
+      }
+    }
+  }
+
+  // Footer for buttons
+  .cta-footer {
+    width: 100%;
+    box-sizing: border-box;
+    border-top: $global-border-style;
+    padding: $spacing-double;
+
+    button:not(:last-child) {
+      margin-right: $spacing-double;
+    }
   }
 
 }
@@ -61,7 +115,7 @@
     padding: 6px 8px;
   }
 
-  
+
 }
 
 .DayPickerInput {
@@ -82,15 +136,6 @@
   }
 }
 
-.cta-footer {
-  padding: 16px;
-  text-align: right;
-  border-top: 1px #ccc solid;
-
-  button {
-    margin-left: 8px;
-  }
-}
 
 div.DayPicker-Day {
   border-radius: 2px;
