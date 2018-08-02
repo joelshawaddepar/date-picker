@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@addepar/style-toolbox": "^0.7.0",
     "react": "^16.4.2",
     "react-day-picker": "^7.1.10",
     "react-dom": "^16.4.2",

@@ -12,12 +12,10 @@ class AddeDatePicker extends Component {
       showDateRangePicker: false,
       startDate: '',
       endDate: '',
-      value: '',
     };
 
     this.onFocusHandler = this.onFocusHandler.bind(this);
     this.onBlurHandler = this.onBlurHandler.bind(this);
-    this.onChangeHandler = this.onChangeHandler.bind(this);
   }
 
   renderDateRangePicker() {
@@ -48,28 +46,13 @@ class AddeDatePicker extends Component {
     });
   }
 
-  onChangeHandler(e) {
-    const value = e.target.value;
-    if (value === '=') {
-      this.setState({
-        showDateRangePicker: false,
-        showAdvancedMode: true,
-        value: '',
-      });
-    }
-  }
-
   render() {
     return (
       <div className='addeDatePicker'>
-        <div>
-          <Input
-            value={this.state.value}
-            onFocus={this.onFocusHandler}
-            onBlur={this.onBlurHandler}
-            onChange={this.onChangeHandler}
-          />
-        </div>
+        <Input
+          onFocus={this.onFocusHandler}
+          className='adde-text-input'
+        />
         { this.renderAdvancedMode() }
         { this.renderDateRangePicker() }
       </div>
