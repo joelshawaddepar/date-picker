@@ -8,9 +8,12 @@ class Input extends Component {
   render() {
     return (
       <div className='input'>
-        <input 
+        <input
           onFocus={this.props.onFocus}
           onBlur={this.props.onBlur}
+          placeholder="Date"
+          type="text"
+          className="adde-text-input"
         />
       </div>
     );
