@@ -10,7 +10,22 @@ class App extends Component {
     return (
       <div className="App">
 
-        <div className="header">header</div>
+        <div className="header">
+          <div className="header-nav">
+            <div className="header-dropdown context-chooser">
+              Avengers Portfolio, Tony and Bruce
+            </div>
+            <ul className="header-tab">
+              <li className="header-tab-item">Details</li>
+              <li className="header-tab-item is-active">Analysis</li>
+              <li className="header-tab-item">Transactions</li>
+              <li className="header-tab-item">Reports</li>
+            </ul>
+          </div>
+          <div className="header-dropdown">
+            Adam Smith
+          </div>
+        </div>
         <div className="home">
         	<div className="sidebar"></div>
         	<div className="content">

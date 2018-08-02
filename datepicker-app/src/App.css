@@ -435,10 +435,12 @@ label[class^=button-] {
   width: 620px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
-.dateRangePicker .dateRangePicker-content {
+
+.dateRangePicker-content {
   display: flex;
 }
-.dateRangePicker .dateRangePicker-quicklinks {
+
+.dateRangePicker-quicklinks {
   padding-top: 8px;
 }
 
@@ -461,15 +463,18 @@ label[class^=button-] {
 .DayPickerInput {
   display: block;
 }
-.DayPickerInput .DayPickerInput-OverlayWrapper {
+
+.DayPickerInput-OverlayWrapper {
   width: 100%;
 }
-.DayPickerInput .DayPickerInput-Overlay {
+
+.DayPickerInput-Overlay {
   box-shadow: none;
   width: 100%;
   position: relative;
 }
-.DayPickerInput .DayPicker-Month {
+
+.DayPicker-Month {
   margin: 24px 0 0;
 }
 
@@ -509,7 +514,63 @@ div.DayPicker-Day--today {
 
 .header {
   background: #222;
-  height: 40px;
+  height: 48px;
+  color: #f3f3f3;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-nav {
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  list-style-type: none;
+  text-indent: 0;
+}
+
+.header-dropdown {
+  padding: 0 24px;
+  height: 100%;
+  align-items: center;
+  display: flex;
+}
+
+.context-chooser {
+  border-right: 1px #626262 solid;
+}
+
+.header-tab {
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
+.header-tab-item {
+  height: 100%;
+  align-items: center;
+  display: flex;
+  color: #A1A1A1;
+  padding: 0 24px;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+}
+.header-tab-item.is-active {
+  color: #f3f3f3;
+  border-bottom: 3px #4ECFFF solid;
+  position: relative;
+}
+.header-tab-item:hover {
+  color: #bbbbbb;
 }
 
 .sidebar {

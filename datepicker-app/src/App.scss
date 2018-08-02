@@ -21,26 +21,22 @@
     input {
       @extend %body-font-styling;
     }
-  }
-
-  
+  }  
 }
 
 .dateRangePicker {
     width: 620px;
     box-shadow: 0 2px 4px rgba(0,0,0, 0.2);
-
-  .dateRangePicker-content {
-    display: flex;
-  }
-
-
-  .dateRangePicker-quicklinks {
-    padding-top: 8px;
-  }
-
 }
 
+
+.dateRangePicker-content {
+    display: flex;
+}
+
+.dateRangePicker-quicklinks {
+  padding-top: 8px;
+}
 
 .date-picker-wrapper {
   padding: $spacing-double;
@@ -66,21 +62,22 @@
 
 .DayPickerInput {
   display: block;
-
-  .DayPickerInput-OverlayWrapper {
-    width: 100%;
-  }
-
-  .DayPickerInput-Overlay {
-    box-shadow: none;
-    width: 100%;
-    position: relative;
-  }
-
-  .DayPicker-Month {
-    margin: $spacing-triple 0 0;
-  }
 }
+
+.DayPickerInput-OverlayWrapper {
+  width: 100%;
+}
+
+.DayPickerInput-Overlay {
+  box-shadow: none;
+  width: 100%;
+  position: relative;
+}
+
+.DayPicker-Month {
+  margin: $spacing-triple 0 0;
+}
+
 
 .cta-footer {
   padding: 16px;
@@ -119,8 +116,69 @@ div.DayPicker-Day--today {
 
 .header {
   background: #222;
-  height: 40px;
+  height: 48px;
+  color: #f3f3f3;
+  display: flex;
+  justify-content: space-between;
 }
+
+.header-nav {
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  list-style-type: none;
+  text-indent: 0;
+}
+
+.header-dropdown {
+  padding: 0 24px;
+  height: 100%;
+  align-items: center;
+  display: flex;
+}
+
+.context-chooser {
+  border-right: 1px #626262 solid;
+}
+
+.header-tab {
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
+.header-tab-item {
+  height: 100%;
+  align-items: center;
+  display: flex;
+  color: #A1A1A1;
+  padding: 0 24px;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+
+
+  &.is-active {
+    color: #f3f3f3;
+    border-bottom: 3px #4ECFFF solid;
+    position: relative;
+  }
+
+  &:hover {
+    color: lighten(#A1A1A1, 10%);
+
+  }
+}
+
 
 .sidebar {
   background: #f3f3f3;
@@ -130,3 +188,4 @@ div.DayPicker-Day--today {
 .content {
   padding: 24px;
 }
+
