@@ -80,7 +80,6 @@ class AddeDatePicker extends Component {
 
     this.onFocusHandler = this.onFocusHandler.bind(this);
     this.onBlurHandler = this.onBlurHandler.bind(this);
-    this.onChangeHandler = this.onChangeHandler.bind(this);
   }
 
   renderDateRangePicker() {
