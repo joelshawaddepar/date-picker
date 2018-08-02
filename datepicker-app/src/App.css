@@ -419,7 +419,11 @@ label[class^=button-] {
   height: 24px;
 }
 
-.addeDatePicker .dateRangePicker .date-picker-wrapper input, .addeDatePicker .dateRangePicker .date-picker-wrapper label, .addeDatePicker .input input {
+* {
+  box-sizing: border-box;
+}
+
+.date-picker-wrapper input, .date-picker-wrapper label, .addeDatePicker .input input {
   font-size: 14px;
   line-height: 1.33;
 }
@@ -427,55 +431,75 @@ label[class^=button-] {
 .addeDatePicker .input {
   display: inline-block;
 }
-.addeDatePicker .dateRangePicker {
+.dateRangePicker {
   width: 620px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
-.addeDatePicker .dateRangePicker .dateRangePicker-content {
+.dateRangePicker .dateRangePicker-content {
   display: flex;
 }
-.addeDatePicker .dateRangePicker .dateRangePicker-quicklinks {
+.dateRangePicker .dateRangePicker-quicklinks {
   padding-top: 8px;
 }
-.addeDatePicker .dateRangePicker .date-picker-wrapper {
+
+.date-picker-wrapper {
   padding: 16px;
 }
-.addeDatePicker .dateRangePicker .date-picker-wrapper label {
+.date-picker-wrapper label {
   color: #666;
+  display: inline-block;
   margin-bottom: 2px;
   font-size: 12px;
   font-weight: 500;
 }
-.addeDatePicker .dateRangePicker .date-picker-wrapper input {
+.date-picker-wrapper input {
   display: inline-block;
   width: 100%;
+  padding: 6px 8px;
 }
-.addeDatePicker .dateRangePicker .date-picker-wrapper .DayPickerInput {
+
+.DayPickerInput {
   display: block;
 }
-.addeDatePicker .dateRangePicker .date-picker-wrapper .DayPickerInput .DayPickerInput-OverlayWrapper {
+.DayPickerInput .DayPickerInput-OverlayWrapper {
   width: 100%;
 }
-.addeDatePicker .dateRangePicker .date-picker-wrapper .DayPickerInput .DayPickerInput-Overlay {
+.DayPickerInput .DayPickerInput-Overlay {
   box-shadow: none;
   width: 100%;
   position: relative;
 }
-.addeDatePicker .dateRangePicker .date-picker-wrapper .DayPickerInput .DayPicker-Month {
+.DayPickerInput .DayPicker-Month {
   margin: 24px 0 0;
 }
-.addeDatePicker .dateRangePicker .cta-footer {
+
+.cta-footer {
   padding: 16px;
   text-align: right;
   border-top: 1px #ccc solid;
 }
-.addeDatePicker .dateRangePicker .cta-footer button {
+.cta-footer button {
   margin-left: 8px;
+}
+
+div.DayPicker-Day {
+  border-radius: 2px;
+}
+
+div.DayPicker-Caption > div {
+  font-size: 14px;
+}
+
+div.DayPicker-Day--today {
+  color: #4A90E2;
 }
 
 .button-text {
   color: #4A90E2;
   min-width: 50px;
+}
+.button-text:hover {
+  color: #76abe9;
 }
 
 .home {

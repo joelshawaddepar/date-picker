@@ -3,6 +3,10 @@
 @import "../node_modules/@addepar/style-toolbox/styles/onyx/elements/inputs/text/index";
 @import "../node_modules/@addepar/style-toolbox/styles/onyx/elements/inputs/button/index";
 
+* {
+  box-sizing: border-box;
+}
+
 %body-font-styling {
   font-size: $font-size-medium;
   line-height: $line-height-large;
@@ -19,71 +23,93 @@
     }
   }
 
-  .dateRangePicker {
+  
+}
+
+.dateRangePicker {
     width: 620px;
     box-shadow: 0 2px 4px rgba(0,0,0, 0.2);
 
-    .dateRangePicker-content {
-      display: flex;
-    }
-
-
-    .dateRangePicker-quicklinks {
-      padding-top: 8px;
-    }
-
-
-    .date-picker-wrapper {
-      padding: $spacing-double;
-
-      label  {
-        @extend %body-font-styling;
-        color: #666;
-        margin-bottom: 2px;
-        font-size: 12px;
-        font-weight: 500;
-      }
-
-      input {
-        @extend %body-font-styling;
-        display: inline-block;
-        width: 100%;
-      }
-
-      .DayPickerInput {
-        display: block;
-
-        .DayPickerInput-OverlayWrapper {
-          width: 100%;
-        }
-
-        .DayPickerInput-Overlay {
-          box-shadow: none;
-          width: 100%;
-          position: relative;
-        }
-
-        .DayPicker-Month {
-          margin: $spacing-triple 0 0;
-        }
-      }
-    }
-
-    .cta-footer {
-      padding: 16px;
-      text-align: right;
-      border-top: 1px #ccc solid;
-
-      button {
-        margin-left: 8px;
-      }
-    }
+  .dateRangePicker-content {
+    display: flex;
   }
+
+
+  .dateRangePicker-quicklinks {
+    padding-top: 8px;
+  }
+
+}
+
+
+.date-picker-wrapper {
+  padding: $spacing-double;
+
+  label  {
+    @extend %body-font-styling;
+    color: #666;
+    display: inline-block;
+    margin-bottom: 2px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  input {
+    @extend %body-font-styling;
+    display: inline-block;
+    width: 100%;
+    padding: 6px 8px;
+  }
+
+  
+}
+
+.DayPickerInput {
+  display: block;
+
+  .DayPickerInput-OverlayWrapper {
+    width: 100%;
+  }
+
+  .DayPickerInput-Overlay {
+    box-shadow: none;
+    width: 100%;
+    position: relative;
+  }
+
+  .DayPicker-Month {
+    margin: $spacing-triple 0 0;
+  }
+}
+
+.cta-footer {
+  padding: 16px;
+  text-align: right;
+  border-top: 1px #ccc solid;
+
+  button {
+    margin-left: 8px;
+  }
+}
+
+div.DayPicker-Day {
+  border-radius: 2px;
+}
+
+div.DayPicker-Caption > div {
+  font-size: 14px;
+}
+
+div.DayPicker-Day--today {
+  color: #4A90E2;
 }
 
 .button-text {
   color: #4A90E2;
   min-width: 50px;
+  &:hover {
+    color: lighten(#4A90E2, 10%);
+  }
 }
 
 .home {

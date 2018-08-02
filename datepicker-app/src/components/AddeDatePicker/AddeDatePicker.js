@@ -49,10 +49,13 @@ class AddeDatePicker extends Component {
   render() {
     return (
       <div className='addeDatePicker'>
+
         <Input
           onFocus={this.onFocusHandler}
           className='adde-text-input'
         />
+
+
         { this.renderAdvancedMode() }
         { this.renderDateRangePicker() }
       </div>
