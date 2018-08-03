@@ -1,7 +1,25 @@
 import React, { Component } from 'react';
+import moment from 'moment';
+
 import AdvancedMode from '../AdvancedMode/AdvancedMode';
 import DateRangePicker from '../DateRangePicker/DateRangePicker';
-import Input from './Input';
+import Input from '../Input/Input';
+
+import {
+  dateRangeBuilder,
+  dateBuilder,
+  getLastDate,
+  momentBuilder,
+} from '../../utils/dates';
+
+import {
+  getSuggestions,
+  getSuggestionValue,
+  renderSuggestion,
+} from '../../utils/autosuggestions';
+
+const todayObject = new Date();
+const dateOfToday = dateBuilder(todayObject);
 
 class AddeDatePicker extends Component {
   constructor(props) {
@@ -12,10 +30,14 @@ class AddeDatePicker extends Component {
       showDateRangePicker: false,
       startDate: '',
       endDate: '',
+      suggestions: [],
+      value: '',
+      commandValue: '',
     };
 
     this.onFocusHandler = this.onFocusHandler.bind(this);
     this.onBlurHandler = this.onBlurHandler.bind(this);
+    this.onChangeHandler = this.onChangeHandler.bind(this);
   }
 
   renderDateRangePicker() {
@@ -39,20 +61,175 @@ class AddeDatePicker extends Component {
     });
   }
 
-  onBlurHandler() {
-    this.setState({
-      showDateRangePicker: false,
-      showAdvancedMode: false,
-    });
+  onBlurHandler(e) {
+    if (!this.state.showAdvancedMode) return;
+    const input = e.target.value;
+    // Simple logic for now
+    if (input.includes('/')) {
+      return;
+    }
+
+    const dates = input.split(' ');
+    if (dates.length === 1 && dates[0] === '') {
+      this.setState({
+        showDateRangePicker: false,
+        showAdvancedMode: false,
+        startDate: dateOfToday,
+        endDate: dateOfToday,
+        commandValue: '',
+        value: dateRangeBuilder(dateOfToday, dateOfToday),
+      });
+    } else if (dates.length === 1) {
+      const date = dates[0];
+      const characters = date.split('-');
+      // handle error here
+      const endDate = characters[1];
+      // Pattern like T-1, T-30
+      if(!isNaN(endDate)) {
+        const result = momentBuilder(dateOfToday, parseInt(endDate), 'days');
+        this.setState({
+          showDateRangePicker: false,
+          showAdvancedMode: false,
+          startDate: result,
+          endDate: dateOfToday,
+        });
+      } else {
+        const digitPattern = /[0-9]/g;
+        const charaterPattern = /[a-zA-Z]/g;
+        const letters = endDate.match(charaterPattern).join('');
+        let result;
+        switch (letters) {
+          case 'ME':
+            result = getLastDate(todayObject, 'month');
+            break;
+          // QE is not finished.
+          case 'QE':
+            result = momentBuilder(dateOfToday, 3, 'months');
+            break;
+          case 'YE':
+            result = getLastDate(todayObject, 'year');
+            break;
+        }
+        const numberStrings = endDate.match(digitPattern);
+        let numbers;
+        numberStrings ? numbers = parseInt(endDate.match(digitPattern).join('')) : null;
+        if (numbers) {
+          let daysToSubtract;
+          let numbersOfWeekends = Math.floor(numbers / 7);
+
+          switch (moment(todayObject).day()) {
+            case 0:
+              daysToSubtract = numbers + 1 + numbersOfWeekends * 2;
+              break;
+            case 1:
+              daysToSubtract = numbers + 2 + numbersOfWeekends * 2;
+              break;
+            case 2:
+              if (numbers > 1) {
+                daysToSubtract = numbers + 2 + numbersOfWeekends * 2;
+              } else {
+                daysToSubtract = numbers;
+              }
+              break;
+            case 3:
+              if (numbers > 2) {
+                daysToSubtract = numbers + 2 + numbersOfWeekends * 2;
+              } else {
+                daysToSubtract = numbers;
+              }
+              break;
+            case 4:
+              if (numbers > 3) {
+                daysToSubtract = numbers + 2 + numbersOfWeekends * 2;
+              } else {
+                daysToSubtract = numbers;
+              }
+              break;
+            case 5:
+              if (numbers > 4) {
+                daysToSubtract = numbers + 2 + numbersOfWeekends * 2;
+              } else {
+                daysToSubtract = numbers;
+              }
+              break;
+            case 6:
+              daysToSubtract = numbers + numbersOfWeekends * 2;
+              break;
+          }
+
+          result = momentBuilder(dateOfToday, daysToSubtract, 'days');
+        }
+    
+        this.setState({
+          showDateRangePicker: false,
+          showAdvancedMode: false,
+          startDate: result,
+          endDate: dateOfToday,
+        });
+      }
+    }
   }
 
+  onChangeHandler(e) {
+    const value = e.target.value;
+    const { showAdvancedMode, showDateRangePicker } = this.state;
+
+    if (value === '=' && !showAdvancedMode) {
+      this.setState({
+        showDateRangePicker: false,
+        showAdvancedMode: true,
+        startDate: '',
+        endDate: '',
+        commandValue: '',
+        value: '',
+      });
+    } else if (showDateRangePicker) {
+      this.setState({
+        value,
+      });
+    } else if (showAdvancedMode) {
+      this.setState({
+        commandValue: value,
+      });
+    }
+  }
+
+  onSuggestionsFetchRequested = ({ value }) => {
+    this.setState({
+      suggestions: getSuggestions(value)
+    });
+  };
+
+  onSuggestionsClearRequested = () => {
+    this.setState({
+      suggestions: []
+    });
+  };
+
   render() {
+    const { startDate, endDate, suggestions, commandValue, value } = this.state;
+    let inputValue;
+    if(this.state.AdvancedMode) {
+      inputValue = commandValue;
+    } else {
+      inputValue = value;
+    }
+
     return (
       <div className='addeDatePicker'>
-        <Input
-          onFocus={this.onFocusHandler}
-          className='adde-text-input'
-        />
+        <div>
+          <Input
+            value={inputValue}
+            onFocus={this.onFocusHandler}
+            onBlur={this.onBlurHandler}
+            onChange={this.onChangeHandler}
+            suggestions={suggestions}
+            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+            getSuggestionValue={getSuggestionValue}
+            renderSuggestion={renderSuggestion}
+          />
+        </div>
         { this.renderAdvancedMode() }
         { this.renderDateRangePicker() }
       </div>

@@ -347,9 +347,12 @@ label[class^='button-'] {
     width: 24px;
     height: 24px; }
 
+* {
+  box-sizing: border-box; }
+
 .addeDatePicker .input input, .adde-date-range .body > .start-date label,
 .adde-date-range .body > .end-date label, .adde-date-range .body > .start-date input,
-.adde-date-range .body > .end-date input {
+.adde-date-range .body > .end-date input, .date-picker-wrapper label, .date-picker-wrapper input {
   font-size: 14px;
   line-height: 1.33; }
 
@@ -361,6 +364,8 @@ label[class^='button-'] {
   flex-direction: column;
   width: 600px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+  .adde-date-range .dateRangePicker-quicklinks {
+    padding-top: 8px; }
   .adde-date-range .body {
     display: flex; }
     .adde-date-range .body > .start-date,
@@ -401,5 +406,59 @@ label[class^='button-'] {
     padding: 16px; }
     .adde-date-range .cta-footer button:not(:last-child) {
       margin-right: 16px; }
+
+.date-picker-wrapper {
+  padding: 16px; }
+  .date-picker-wrapper label {
+    color: #666;
+    display: inline-block;
+    margin-bottom: 2px;
+    font-size: 12px;
+    font-weight: 500; }
+  .date-picker-wrapper input {
+    display: inline-block;
+    width: 100%;
+    padding: 6px 8px; }
+
+.DayPickerInput {
+  display: block; }
+  .DayPickerInput .DayPickerInput-OverlayWrapper {
+    width: 100%; }
+  .DayPickerInput .DayPickerInput-Overlay {
+    box-shadow: none;
+    width: 100%;
+    position: relative; }
+  .DayPickerInput .DayPicker-Month {
+    margin: 24px 0 0; }
+
+div.DayPicker-Day {
+  border-radius: 2px; }
+
+div.DayPicker-Caption > div {
+  font-size: 14px; }
+
+div.DayPicker-Day--today {
+  color: #4A90E2; }
+
+.button-text {
+  color: #4A90E2;
+  min-width: 50px; }
+  .button-text:hover {
+    color: #76abe9; }
+
+.home {
+  display: flex;
+  height: calc(100vh - 40px); }
+
+.header {
+  background: #222;
+  height: 40px; }
+
+.sidebar {
+  background: #f3f3f3;
+  width: 300px; }
+
+.content {
+  padding: 24px; }
 
 /*# sourceMappingURL=App.css.map */
