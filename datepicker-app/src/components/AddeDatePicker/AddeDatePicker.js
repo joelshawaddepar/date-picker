@@ -9,7 +9,7 @@ import {
   dateRangeBuilder,
   dateBuilder,
   getLastDate,
-  momentBuilder,
+  previousDateBuilder,
 } from '../../utils/dates';
 
 import {
@@ -62,12 +62,11 @@ class AddeDatePicker extends Component {
   }
 
   onBlurHandler(e) {
-    if (!this.state.showAdvancedMode) return;
-    const input = e.target.value;
-    // Simple logic for now
-    if (input.includes('/')) {
+    if (!this.state.showAdvancedMode) {
+      // Date Picker logic here.
       return;
     }
+    const input = e.target.value;
 
     const dates = input.split(' ');
     if (dates.length === 1 && dates[0] === '') {
@@ -86,27 +85,30 @@ class AddeDatePicker extends Component {
       const endDate = characters[1];
       // Pattern like T-1, T-30
       if(!isNaN(endDate)) {
-        const result = momentBuilder(dateOfToday, parseInt(endDate), 'days');
+        const result = previousDateBuilder(dateOfToday, parseInt(endDate), 'days');
         this.setState({
           showDateRangePicker: false,
           showAdvancedMode: false,
           startDate: result,
           endDate: dateOfToday,
+          commandValue: '',
+          value: dateRangeBuilder(result, dateOfToday),
         });
       } else {
+        debugger;
         const digitPattern = /[0-9]/g;
         const charaterPattern = /[a-zA-Z]/g;
-        const letters = endDate.match(charaterPattern).join('');
+        const letters = endDate.match(charaterPattern).join('').toLowerCase();
         let result;
         switch (letters) {
-          case 'ME':
+          case 'me':
             result = getLastDate(todayObject, 'month');
             break;
           // QE is not finished.
-          case 'QE':
-            result = momentBuilder(dateOfToday, 3, 'months');
+          case 'qe':
+            result = previousDateBuilder(dateOfToday, 3, 'months');
             break;
-          case 'YE':
+          case 'ye':
             result = getLastDate(todayObject, 'year');
             break;
         }
@@ -157,7 +159,7 @@ class AddeDatePicker extends Component {
               break;
           }
 
-          result = momentBuilder(dateOfToday, daysToSubtract, 'days');
+          result = previousDateBuilder(dateOfToday, daysToSubtract, 'days');
         }
     
         this.setState({
@@ -165,6 +167,8 @@ class AddeDatePicker extends Component {
           showAdvancedMode: false,
           startDate: result,
           endDate: dateOfToday,
+          commandValue: '',
+          value: dateRangeBuilder(result, dateOfToday),
         });
       }
     }
@@ -207,12 +211,14 @@ class AddeDatePicker extends Component {
   };
 
   render() {
-    const { startDate, endDate, suggestions, commandValue, value } = this.state;
+    const { startDate, endDate, suggestions, commandValue, value, showAdvancedMode } = this.state;
     let inputValue;
-    if(this.state.AdvancedMode) {
+    let suggestionResults = suggestions;
+    if(showAdvancedMode) {
       inputValue = commandValue;
     } else {
       inputValue = value;
+      suggestionResults = [];
     }
 
     return (
@@ -223,7 +229,7 @@ class AddeDatePicker extends Component {
             onFocus={this.onFocusHandler}
             onBlur={this.onBlurHandler}
             onChange={this.onChangeHandler}
-            suggestions={suggestions}
+            suggestions={suggestionResults}
             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
             onSuggestionsClearRequested={this.onSuggestionsClearRequested}
             getSuggestionValue={getSuggestionValue}

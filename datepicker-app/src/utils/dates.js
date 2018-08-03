@@ -25,6 +25,6 @@ export const getLastDate = (dateObject, dateType) => {
 }
 
 // return the first day of the date range
-export const momentBuilder = (endate, period, dateType) => {
+export const previousDateBuilder = (endate, period, dateType) => {
   return moment(endate, 'MM/DD/YYYY').subtract(period, dateType).format('L');
 };
