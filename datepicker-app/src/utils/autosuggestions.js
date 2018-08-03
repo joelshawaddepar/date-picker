@@ -9,24 +9,6 @@ import {
   previousDateBuilder,
 } from './dates';
 
-const suggestions = [
-  {
-    commandValue: 'T-ME',
-    description: `the end of last month to today ${getLastDate(todayObject, 'month')} - ${dateOfToday}`,
-  },
-  {
-    commandValue: 'T-YE',
-    description: `the end of last month to today ${getLastDate(todayObject, 'year')} - ${dateOfToday}`,
-  },
-  {
-    commandValue: 'T-5BD'
-  },
-  {
-    commandValue: 'T-3',
-    description: `3 days ago to today ${previousDateBuilder(dateOfToday, parseInt(3), 'days')} - ${dateOfToday}`
-  },
-];
-
 // https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions#Using_Special_Characters
 function escapeRegexCharacters(str) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -44,9 +26,10 @@ export function getSuggestions(value) {
     // handle error here
     const endDate = characters[1];
     if(!isNaN(endDate)) {
+      const dateValue = escapeRegexCharacters(`${previousDateBuilder(dateOfToday, parseInt(endDate), 'days')} - ${dateOfToday}`.trim());
       result = [{
         commandValue: escapedValue,
-        description: `${endDate} days to today ${previousDateBuilder(dateOfToday, parseInt(endDate), 'days')} - ${dateOfToday}`
+        description: `${endDate} days to today ${dateValue}`
       }];
     } else {
       let startDate;
@@ -129,7 +112,7 @@ export function getSuggestions(value) {
     } 
   } else {
     result = [{
-      commandValue: value,
+      commandValue: escapedValue,
       description: 'No matches yet',
     }];
   }
