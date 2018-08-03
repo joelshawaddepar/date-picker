@@ -5,9 +5,6 @@ const suggestions = [
     name: 'T-ME'
   },
   {
-    name: 'T-QE'
-  },
-  {
     name: 'T-YE'
   },
   {
@@ -26,7 +23,7 @@ function escapeRegexCharacters(str) {
 export function getSuggestions(value) {
   const escapedValue = escapeRegexCharacters(value.trim());
   if (escapedValue === '') {
-    return ['initial msg'];
+    return [];
   }
 
   const regex = new RegExp('^' + escapedValue, 'i');
@@ -34,7 +31,9 @@ export function getSuggestions(value) {
   let result = suggestions.filter(suggestion => regex.test(suggestion.name));
 
   if (result.length === 0) {
-    result = ['What you type may not be right.'];
+    result = [{
+      name: 'No match'
+    }];
   }
 
   return result;
@@ -45,7 +44,6 @@ export function getSuggestionValue(suggestion) {
 }
 
 export function renderSuggestion(suggestion) {
-  debugger;
   return (
     <span>{suggestion.name}</span>
   );

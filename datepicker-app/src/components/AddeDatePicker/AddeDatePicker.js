@@ -31,6 +31,7 @@ class AddeDatePicker extends Component {
       startDate: '',
       endDate: '',
       suggestions: [],
+      isNotValid: false,
       value: '',
       commandValue: '',
     };
@@ -48,8 +49,14 @@ class AddeDatePicker extends Component {
   }
 
   renderAdvancedMode() {
-    if(this.state.showAdvancedMode && !this.state.commandValue) {
-      return <AdvancedMode />;
+    const { showAdvancedMode, commandValue, isNotValid } = this.state;
+    if(showAdvancedMode) {
+      return (
+        <AdvancedMode 
+          showInitialSuggestion={!commandValue}
+          showNotValidSuggestion={isNotValid}
+        />
+      );
     }
     return null;
   }
@@ -67,7 +74,7 @@ class AddeDatePicker extends Component {
       return;
     }
     const input = e.target.value;
-
+    debugger;
     const dates = input.split(' ');
     if (dates.length === 1 && dates[0] === '') {
       this.setState({
@@ -77,8 +84,9 @@ class AddeDatePicker extends Component {
         endDate: dateOfToday,
         commandValue: '',
         value: dateRangeBuilder(dateOfToday, dateOfToday),
+        isNotValid: false,
       });
-    } else if (dates.length === 1) {
+    } else if (dates.length === 1 && dates[0].includes('t-')) {
       const date = dates[0];
       const characters = date.split('-');
       // handle error here
@@ -93,6 +101,7 @@ class AddeDatePicker extends Component {
           endDate: dateOfToday,
           commandValue: '',
           value: dateRangeBuilder(result, dateOfToday),
+          isNotValid: false,
         });
       } else {
         debugger;
@@ -169,6 +178,7 @@ class AddeDatePicker extends Component {
           endDate: dateOfToday,
           commandValue: '',
           value: dateRangeBuilder(result, dateOfToday),
+          isNotValid: false,
         });
       }
     }
