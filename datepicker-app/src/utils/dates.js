@@ -14,7 +14,6 @@ export const getLastDate = (dateObject, dateType) => {
   switch (dateType) {
     case 'month':
       result = new Date(dateObject.getFullYear(), dateObject.getMonth(), 0);
-      debugger;
       return dateBuilder(result);
     case 'quarter':
       return;
@@ -28,3 +27,6 @@ export const getLastDate = (dateObject, dateType) => {
 export const previousDateBuilder = (endate, period, dateType) => {
   return moment(endate, 'MM/DD/YYYY').subtract(period, dateType).format('L');
 };
+
+export const todayObject = new Date();
+export const dateOfToday = dateBuilder(todayObject);

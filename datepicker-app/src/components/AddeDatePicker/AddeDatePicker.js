@@ -6,8 +6,9 @@ import DateRangePicker from '../DateRangePicker/DateRangePicker';
 import Input from '../Input/Input';
 
 import {
+  todayObject,
+  dateOfToday,
   dateRangeBuilder,
-  dateBuilder,
   getLastDate,
   previousDateBuilder,
 } from '../../utils/dates';
@@ -17,9 +18,6 @@ import {
   getSuggestionValue,
   renderSuggestion,
 } from '../../utils/autosuggestions';
-
-const todayObject = new Date();
-const dateOfToday = dateBuilder(todayObject);
 
 class AddeDatePicker extends Component {
   constructor(props) {
@@ -74,7 +72,6 @@ class AddeDatePicker extends Component {
       return;
     }
     const input = e.target.value;
-    debugger;
     const dates = input.split(' ');
     if (dates.length === 1 && dates[0] === '') {
       this.setState({
@@ -104,7 +101,6 @@ class AddeDatePicker extends Component {
           isNotValid: false,
         });
       } else {
-        debugger;
         const digitPattern = /[0-9]/g;
         const charaterPattern = /[a-zA-Z]/g;
         const letters = endDate.match(charaterPattern).join('').toLowerCase();
@@ -221,7 +217,7 @@ class AddeDatePicker extends Component {
   };
 
   render() {
-    const { startDate, endDate, suggestions, commandValue, value, showAdvancedMode } = this.state;
+    const { suggestions, commandValue, value, showAdvancedMode } = this.state;
     let inputValue;
     let suggestionResults = suggestions;
     if(showAdvancedMode) {
