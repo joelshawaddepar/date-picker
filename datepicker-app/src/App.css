@@ -661,6 +661,19 @@ li {
   margin-right: 8px;
 }
 
+.datepicker-query-search {
+  padding: 16px;
+}
+.datepicker-query-search p {
+  margin: 0;
+}
+.datepicker-query-search p.small {
+  font-size: 11px;
+}
+.datepicker-query-search .state-no-match {
+  display: none;
+}
+
 .context-chooser {
   border-right: 1px #626262 solid;
 }
