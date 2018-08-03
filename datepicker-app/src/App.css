@@ -357,7 +357,7 @@ label[class^='button-'] {
   font-size: 14px;
   line-height: 1.33; }
 
-.adde-date-range, .datepicker-query-search {
+.adde-date-range, .datepicker-query-search, .react-autosuggest__suggestions-container:not(:empty) {
   display: flex;
   flex-direction: column;
   width: 600px;
@@ -440,6 +440,15 @@ label[class^='button-'] {
       font-size: 11px; }
   .datepicker-query-search .state-no-match {
     display: none; }
+
+.react-autosuggest__suggestions-container:not(:empty) ul {
+  padding: 8px 0;
+  margin: 0;
+  list-style: none; }
+  .react-autosuggest__suggestions-container:not(:empty) ul li {
+    padding: 8px 16px; }
+    .react-autosuggest__suggestions-container:not(:empty) ul li:hover {
+      background: #e9f4fc; }
 
 .home {
   display: flex;
