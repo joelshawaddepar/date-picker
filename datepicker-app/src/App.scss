@@ -12,26 +12,50 @@
   line-height: $line-height-large;
 }
 
+%date-picker-dropdown {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  box-shadow: 0 2px 4px rgba(0,0,0, 0.2);
+}
+
+%input-default-styling {
+  @extend %body-font-styling;
+  background: $background-extra-light;
+  transition: background 0.3s ease;
+
+  &:focus {
+    background: $background-white;
+    outline: none;
+  }
+}
+
 .addeDatePicker {
   // container div for the main input
   .input {
     display: inline-block;
 
     input {
-      @extend %body-font-styling;
+      @extend %input-default-styling;
     }
   }
 }
 
 // Range Picker
 .adde-date-range {
-  display: flex;
-  flex-direction: column;
-  width: 600px;
-  box-shadow: 0 2px 4px rgba(0,0,0, 0.2);
+  @extend %date-picker-dropdown;
 
   .dateRangePicker-quicklinks {
     padding-top: 8px;
+
+    .button-text {
+      color: $text-link;
+      min-width: 50px;
+
+      &:hover {
+        color: $text-link-hover;
+      }
+    }
   }
 
   // Main Section of the Range Picker
@@ -44,15 +68,20 @@
       text-align: left;
       padding: $spacing-double;
 
+      // Start/End Date Label
       label  {
         @extend %body-font-styling;
-        color: #ccc;
+        color: #666;
         display: block;
+        margin-bottom: $spacing-default / 4;
+        font-weight: 500;
       }
 
+      // Start/end Date inputs
       input {
-        @extend %body-font-styling;
         display: block;
+        width: 100%;
+        @extend %input-default-styling;
       }
 
       .DayPickerInput,
@@ -74,6 +103,18 @@
         box-shadow: none;
         position: relative;
       }
+
+      .DayPicker-Day {
+        border-radius: 2px;
+      }
+
+      .DayPicker-Caption > div {
+        @extend %body-font-styling;
+      }
+
+      .DayPicker-Day--today {
+        color: #4A90E2;
+      }
     }
   }
 
@@ -91,65 +132,22 @@
 
 }
 
-
-.date-picker-wrapper {
+// Date Picker Advanced
+.datepicker-query-search {
+  @extend %date-picker-dropdown;
   padding: $spacing-double;
 
-  label  {
+  p {
     @extend %body-font-styling;
-    color: #666;
-    display: inline-block;
-    margin-bottom: 2px;
-    font-size: 12px;
-    font-weight: 500;
+    margin: 0;
+
+    &.small {
+      font-size: $font-size-smaller;
+    }
   }
 
-  input {
-    @extend %body-font-styling;
-    display: inline-block;
-    width: 100%;
-    padding: 6px 8px;
-  }
-
-
-}
-
-.DayPickerInput {
-  display: block;
-
-  .DayPickerInput-OverlayWrapper {
-    width: 100%;
-  }
-
-  .DayPickerInput-Overlay {
-    box-shadow: none;
-    width: 100%;
-    position: relative;
-  }
-
-  .DayPicker-Month {
-    margin: $spacing-triple 0 0;
-  }
-}
-
-
-div.DayPicker-Day {
-  border-radius: 2px;
-}
-
-div.DayPicker-Caption > div {
-  font-size: 14px;
-}
-
-div.DayPicker-Day--today {
-  color: #4A90E2;
-}
-
-.button-text {
-  color: #4A90E2;
-  min-width: 50px;
-  &:hover {
-    color: lighten(#4A90E2, 10%);
+  .state-no-match {
+    display: none;
   }
 }
 

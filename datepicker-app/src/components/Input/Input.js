@@ -17,12 +17,15 @@ class Input extends Component {
       onSuggestionsClearRequested,
       getSuggestionValue,
       renderSuggestion,
+      className,
     } = this.props;
     const inputProps = {
       value,
       onFocus,
       onBlur,
       onChange,
+      placeholder: 'Select a Date',
+      className: 'adde-text-input'
     };
 
     return (

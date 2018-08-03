@@ -350,101 +350,96 @@ label[class^='button-'] {
 * {
   box-sizing: border-box; }
 
-.addeDatePicker .input input, .adde-date-range .body > .start-date label,
-.adde-date-range .body > .end-date label, .adde-date-range .body > .start-date input,
-.adde-date-range .body > .end-date input, .date-picker-wrapper label, .date-picker-wrapper input {
+.addeDatePicker .input input, .adde-date-range .body > .start-date input,
+.adde-date-range .body > .end-date input, .adde-date-range .body > .start-date label,
+.adde-date-range .body > .end-date label, .adde-date-range .body > .start-date .DayPicker-Caption > div,
+.adde-date-range .body > .end-date .DayPicker-Caption > div, .datepicker-query-search p {
   font-size: 14px;
   line-height: 1.33; }
 
-.addeDatePicker .input {
-  display: inline-block; }
-
-.adde-date-range {
+.adde-date-range, .datepicker-query-search {
   display: flex;
   flex-direction: column;
   width: 600px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
-  .adde-date-range .dateRangePicker-quicklinks {
-    padding-top: 8px; }
-  .adde-date-range .body {
-    display: flex; }
-    .adde-date-range .body > .start-date,
-    .adde-date-range .body > .end-date {
-      width: 50%;
-      text-align: left;
-      padding: 16px; }
-      .adde-date-range .body > .start-date label,
-      .adde-date-range .body > .end-date label {
-        color: #ccc;
-        display: block; }
-      .adde-date-range .body > .start-date input,
-      .adde-date-range .body > .end-date input {
-        display: block; }
-      .adde-date-range .body > .start-date .DayPickerInput,
-      .adde-date-range .body > .start-date .DayPicker,
-      .adde-date-range .body > .end-date .DayPickerInput,
-      .adde-date-range .body > .end-date .DayPicker {
-        display: block; }
-      .adde-date-range .body > .start-date .DayPicker-Month,
-      .adde-date-range .body > .start-date .DayPickerInput-Overlay,
-      .adde-date-range .body > .start-date .DayPickerInput-OverlayWrapper,
-      .adde-date-range .body > .end-date .DayPicker-Month,
-      .adde-date-range .body > .end-date .DayPickerInput-Overlay,
-      .adde-date-range .body > .end-date .DayPickerInput-OverlayWrapper {
-        width: 100%; }
-      .adde-date-range .body > .start-date .DayPicker-Month,
-      .adde-date-range .body > .end-date .DayPicker-Month {
-        margin: 24px 0 0; }
-      .adde-date-range .body > .start-date .DayPickerInput-Overlay,
-      .adde-date-range .body > .end-date .DayPickerInput-Overlay {
-        box-shadow: none;
-        position: relative; }
-  .adde-date-range .cta-footer {
-    width: 100%;
-    box-sizing: border-box;
-    border-top: 1px solid #e9e9e9;
+
+.addeDatePicker .input input, .adde-date-range .body > .start-date input,
+.adde-date-range .body > .end-date input {
+  background: #f4f4f4;
+  transition: background 0.3s ease; }
+  .addeDatePicker .input input:focus, .adde-date-range .body > .start-date input:focus,
+  .adde-date-range .body > .end-date input:focus {
+    background: #ffffff;
+    outline: none; }
+
+.addeDatePicker .input {
+  display: inline-block; }
+
+.adde-date-range .dateRangePicker-quicklinks {
+  padding-top: 8px; }
+  .adde-date-range .dateRangePicker-quicklinks .button-text {
+    color: #27618a;
+    min-width: 50px; }
+    .adde-date-range .dateRangePicker-quicklinks .button-text:hover {
+      color: #1c4562; }
+.adde-date-range .body {
+  display: flex; }
+  .adde-date-range .body > .start-date,
+  .adde-date-range .body > .end-date {
+    width: 50%;
+    text-align: left;
     padding: 16px; }
-    .adde-date-range .cta-footer button:not(:last-child) {
-      margin-right: 16px; }
-
-.date-picker-wrapper {
+    .adde-date-range .body > .start-date label,
+    .adde-date-range .body > .end-date label {
+      color: #666;
+      display: block;
+      margin-bottom: 2px;
+      font-weight: 500; }
+    .adde-date-range .body > .start-date input,
+    .adde-date-range .body > .end-date input {
+      display: block;
+      width: 100%; }
+    .adde-date-range .body > .start-date .DayPickerInput,
+    .adde-date-range .body > .start-date .DayPicker,
+    .adde-date-range .body > .end-date .DayPickerInput,
+    .adde-date-range .body > .end-date .DayPicker {
+      display: block; }
+    .adde-date-range .body > .start-date .DayPicker-Month,
+    .adde-date-range .body > .start-date .DayPickerInput-Overlay,
+    .adde-date-range .body > .start-date .DayPickerInput-OverlayWrapper,
+    .adde-date-range .body > .end-date .DayPicker-Month,
+    .adde-date-range .body > .end-date .DayPickerInput-Overlay,
+    .adde-date-range .body > .end-date .DayPickerInput-OverlayWrapper {
+      width: 100%; }
+    .adde-date-range .body > .start-date .DayPicker-Month,
+    .adde-date-range .body > .end-date .DayPicker-Month {
+      margin: 24px 0 0; }
+    .adde-date-range .body > .start-date .DayPickerInput-Overlay,
+    .adde-date-range .body > .end-date .DayPickerInput-Overlay {
+      box-shadow: none;
+      position: relative; }
+    .adde-date-range .body > .start-date .DayPicker-Day,
+    .adde-date-range .body > .end-date .DayPicker-Day {
+      border-radius: 2px; }
+    .adde-date-range .body > .start-date .DayPicker-Day--today,
+    .adde-date-range .body > .end-date .DayPicker-Day--today {
+      color: #4A90E2; }
+.adde-date-range .cta-footer {
+  width: 100%;
+  box-sizing: border-box;
+  border-top: 1px solid #e9e9e9;
   padding: 16px; }
-  .date-picker-wrapper label {
-    color: #666;
-    display: inline-block;
-    margin-bottom: 2px;
-    font-size: 12px;
-    font-weight: 500; }
-  .date-picker-wrapper input {
-    display: inline-block;
-    width: 100%;
-    padding: 6px 8px; }
+  .adde-date-range .cta-footer button:not(:last-child) {
+    margin-right: 16px; }
 
-.DayPickerInput {
-  display: block; }
-  .DayPickerInput .DayPickerInput-OverlayWrapper {
-    width: 100%; }
-  .DayPickerInput .DayPickerInput-Overlay {
-    box-shadow: none;
-    width: 100%;
-    position: relative; }
-  .DayPickerInput .DayPicker-Month {
-    margin: 24px 0 0; }
-
-div.DayPicker-Day {
-  border-radius: 2px; }
-
-div.DayPicker-Caption > div {
-  font-size: 14px; }
-
-div.DayPicker-Day--today {
-  color: #4A90E2; }
-
-.button-text {
-  color: #4A90E2;
-  min-width: 50px; }
-  .button-text:hover {
-    color: #76abe9; }
+.datepicker-query-search {
+  padding: 16px; }
+  .datepicker-query-search p {
+    margin: 0; }
+    .datepicker-query-search p.small {
+      font-size: 11px; }
+  .datepicker-query-search .state-no-match {
+    display: none; }
 
 .home {
   display: flex;
