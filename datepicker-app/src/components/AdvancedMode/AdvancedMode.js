@@ -8,10 +8,10 @@ class AdvancedMode extends Component {
           <p>Start typing an expression - e.g. t-3</p>
         </div>
 
-        <div className="state-no-match">
+        {/* <div className="state-no-match">
           <p>t-</p>
           <p className="small">No matches yet</p>
-        </div>
+        </div> */}
       </div>
     );
   }

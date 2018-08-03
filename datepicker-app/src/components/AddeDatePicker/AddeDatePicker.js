@@ -48,7 +48,7 @@ class AddeDatePicker extends Component {
   }
 
   renderAdvancedMode() {
-    if(this.state.showAdvancedMode) {
+    if(this.state.showAdvancedMode && !this.state.commandValue) {
       return <AdvancedMode />;
     }
     return null;
