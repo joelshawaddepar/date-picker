@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DayPicker from 'react-day-picker/DayPicker';
+import moment from 'moment';
 import 'react-day-picker/lib/style.css';
 
 
@@ -8,6 +9,7 @@ export default class DateRangePicker extends React.Component {
     super(props);
     this.selectedStartDay = this.selectedStartDay.bind(this);
     this.selectedEndDay = this.selectedEndDay.bind(this);
+    this.handleApply = this.handleApply.bind(this);
     this.state = {
       selectedStartDay: undefined,
       selectedEndDay: undefined,
@@ -26,6 +28,15 @@ export default class DateRangePicker extends React.Component {
     });
   }
 
+  handleApply(e) {
+    this.props.handler({
+      startday: this.state.selectedStartDay,
+      endday: this.state.selectedEndDay
+    })
+  }
+
+
+
 
   render() {
     const { selectedStartDay, selectedEndDay } = this.state;
@@ -35,13 +46,13 @@ export default class DateRangePicker extends React.Component {
         <div className="dateRangePicker-quicklinks">
           <button className="button-text">YTD</button>
           <button className="button-text">MTD</button>
-          <button className="button-text">WTD</button>
+          <button className="button-text">This Year</button>
         </div>
 
         <section className="body">
           <div className="start-date">
             <label className="input-label">Start Date</label>
-            <input type="text" className="adde-text-input" value={this.state.selectedStartDay}/>
+            <input type="text" className="adde-text-input" value={moment(this.state.selectedStartDay).format("MM/DD/YY")}/>
 
             <DayPicker
               selectedDays={this.state.selectedStartDay}
@@ -51,7 +62,7 @@ export default class DateRangePicker extends React.Component {
 
           <div className="end-date">
             <label className="input-label">End Date</label>
-            <input type="text" className="adde-text-input" value={this.state.selectedEndDay}/>
+            <input type="text" className="adde-text-input" value={moment(this.state.selectedEndDay).format("MM/DD/YY")}/>
 
             <DayPicker
               selectedDays={this.state.selectedEndDay}
@@ -61,7 +72,7 @@ export default class DateRangePicker extends React.Component {
         </section>
 
         <footer className="cta-footer">
-          <button className="button-primary">Apply</button>
+          <button className="button-primary" onClick = {this.handleApply}>Apply</button>
           <button className="button-default">Cancel</button>
         </footer>
       </div>

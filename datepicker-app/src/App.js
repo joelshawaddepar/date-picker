@@ -3,6 +3,11 @@ import './App.css';
 
 import AddeDatePicker from './components/AddeDatePicker/AddeDatePicker';
 import DateRangePicker from './components/DateRangePicker/DateRangePicker';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCaretDown, faCalendar } from '@fortawesome/free-solid-svg-icons'
+
+library.add([faCaretDown, faCalendar])
 
 
 class App extends Component {
@@ -13,7 +18,10 @@ class App extends Component {
         <div className="header">
           <div className="header-nav">
             <div className="header-dropdown context-chooser">
-              Avengers Portfolio, Tony and Bruce
+              <span>
+                Avengers Portfolio, Tony and Bruce
+              </span>
+               <FontAwesomeIcon icon="caret-down" />
             </div>
             <ul className="header-tab">
               <li className="header-tab-item">Details</li>
@@ -23,18 +31,22 @@ class App extends Component {
             </ul>
           </div>
           <div className="header-dropdown">
-            Adam Smith
+            <span>
+              Adam Smith
+            </span>
+            <FontAwesomeIcon icon="caret-down" />
           </div>
         </div>
         <div className="home">
-        	<div className="sidebar"></div>
-        	<div className="content">
-	        	<AddeDatePicker
-		          startDate=''
-		          endDate=''
-              placeholder='Select Date'
-		        />
-        	</div>
+          <div>
+          	<div className="content">
+  	        	<AddeDatePicker
+  		          startDate='08/03/2018'
+  		          endDate='08/03/2018'
+                placeholder='Select Date'
+  		        />
+          	</div>
+          </div>
         </div>
       </div>
     );

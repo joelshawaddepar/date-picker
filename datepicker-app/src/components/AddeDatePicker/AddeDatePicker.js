@@ -3,13 +3,15 @@ import moment from 'moment';
 
 import AdvancedMode from '../AdvancedMode/AdvancedMode';
 import DateRangePicker from '../DateRangePicker/DateRangePicker';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Input from '../Input/Input';
 
 import {
+  todayObject,
+  dateOfToday,
   dateRangeBuilder,
-  dateBuilder,
   getLastDate,
-  momentBuilder,
+  previousDateBuilder,
 } from '../../utils/dates';
 
 import {
@@ -18,9 +20,6 @@ import {
   renderSuggestion,
 } from '../../utils/autosuggestions';
 
-const todayObject = new Date();
-const dateOfToday = dateBuilder(todayObject);
-
 class AddeDatePicker extends Component {
   constructor(props) {
     super(props);
@@ -28,9 +27,11 @@ class AddeDatePicker extends Component {
     this.state = {
       showAdvancedMode: false,
       showDateRangePicker: false,
+      datePickerFlowDone: false,
       startDate: '',
       endDate: '',
       suggestions: [],
+      isNotValid: false,
       value: '',
       commandValue: '',
     };
@@ -38,18 +39,26 @@ class AddeDatePicker extends Component {
     this.onFocusHandler = this.onFocusHandler.bind(this);
     this.onBlurHandler = this.onBlurHandler.bind(this);
     this.onChangeHandler = this.onChangeHandler.bind(this);
+    this.handler = this.handler.bind(this);
   }
 
   renderDateRangePicker() {
     if(this.state.showDateRangePicker) {
-      return <DateRangePicker />;
+      return <DateRangePicker handler={this.handler} />;
     }
     return null;
   }
 
+  
   renderAdvancedMode() {
-    if(this.state.showAdvancedMode) {
-      return <AdvancedMode />;
+    const { showAdvancedMode, commandValue, isNotValid } = this.state;
+    if(showAdvancedMode) {
+      return (
+        <AdvancedMode 
+          showInitialSuggestion={!commandValue}
+          showNotValidSuggestion={isNotValid}
+        />
+      );
     }
     return null;
   }
@@ -61,14 +70,27 @@ class AddeDatePicker extends Component {
     });
   }
 
+  handler(e) {
+    console.log(e);
+    let selectedStartDay = moment(e.startday).format("MM/DD/YY"); 
+    let selectedEndDay = moment(e.endday).format("MM/DD/YY");
+    this.setState({
+      value: selectedStartDay + '-' + selectedEndDay,
+      showDateRangePicker: false,
+    });
+  }
+
+
   onBlurHandler(e) {
-    if (!this.state.showAdvancedMode) return;
-    const input = e.target.value;
-    // Simple logic for now
-    if (input.includes('/')) {
+    if (!this.state.showAdvancedMode) {
+
+      // Date Picker logic here.
+      this.setState({
+        showDateRangePicker: true,
+      });
       return;
     }
-
+    const input = e.target.value;
     const dates = input.split(' ');
     if (dates.length === 1 && dates[0] === '') {
       this.setState({
@@ -78,35 +100,39 @@ class AddeDatePicker extends Component {
         endDate: dateOfToday,
         commandValue: '',
         value: dateRangeBuilder(dateOfToday, dateOfToday),
+        isNotValid: false,
       });
-    } else if (dates.length === 1) {
+    } else if (dates.length === 1 && dates[0].includes('t-')) {
       const date = dates[0];
       const characters = date.split('-');
       // handle error here
       const endDate = characters[1];
       // Pattern like T-1, T-30
       if(!isNaN(endDate)) {
-        const result = momentBuilder(dateOfToday, parseInt(endDate), 'days');
+        const result = previousDateBuilder(dateOfToday, parseInt(endDate), 'days');
         this.setState({
           showDateRangePicker: false,
           showAdvancedMode: false,
           startDate: result,
           endDate: dateOfToday,
+          commandValue: '',
+          value: dateRangeBuilder(result, dateOfToday),
+          isNotValid: false,
         });
       } else {
         const digitPattern = /[0-9]/g;
         const charaterPattern = /[a-zA-Z]/g;
-        const letters = endDate.match(charaterPattern).join('');
+        const letters = endDate.match(charaterPattern).join('').toLowerCase();
         let result;
         switch (letters) {
-          case 'ME':
+          case 'me':
             result = getLastDate(todayObject, 'month');
             break;
           // QE is not finished.
-          case 'QE':
-            result = momentBuilder(dateOfToday, 3, 'months');
+          case 'qe':
+            result = previousDateBuilder(dateOfToday, 3, 'months');
             break;
-          case 'YE':
+          case 'ye':
             result = getLastDate(todayObject, 'year');
             break;
         }
@@ -157,7 +183,7 @@ class AddeDatePicker extends Component {
               break;
           }
 
-          result = momentBuilder(dateOfToday, daysToSubtract, 'days');
+          result = previousDateBuilder(dateOfToday, daysToSubtract, 'days');
         }
     
         this.setState({
@@ -165,6 +191,9 @@ class AddeDatePicker extends Component {
           showAdvancedMode: false,
           startDate: result,
           endDate: dateOfToday,
+          commandValue: '',
+          value: dateRangeBuilder(result, dateOfToday),
+          isNotValid: false,
         });
       }
     }
@@ -207,23 +236,26 @@ class AddeDatePicker extends Component {
   };
 
   render() {
-    const { startDate, endDate, suggestions, commandValue, value } = this.state;
+    const { suggestions, commandValue, value, showAdvancedMode } = this.state;
     let inputValue;
-    if(this.state.AdvancedMode) {
+    let suggestionResults = suggestions;
+    if(showAdvancedMode) {
       inputValue = commandValue;
     } else {
       inputValue = value;
+      suggestionResults = [];
     }
 
     return (
       <div className='addeDatePicker'>
-        <div>
+        <div className="input-wrapper">
+          <FontAwesomeIcon icon="calendar" />
           <Input
             value={inputValue}
             onFocus={this.onFocusHandler}
             onBlur={this.onBlurHandler}
             onChange={this.onChangeHandler}
-            suggestions={suggestions}
+            suggestions={suggestionResults}
             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
             onSuggestionsClearRequested={this.onSuggestionsClearRequested}
             getSuggestionValue={getSuggestionValue}

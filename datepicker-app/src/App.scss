@@ -12,6 +12,24 @@
   line-height: $line-height-large;
 }
 
+%date-picker-dropdown {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  box-shadow: 0 2px 4px rgba(0,0,0, 0.2);
+}
+
+%input-default-styling {
+  @extend %body-font-styling;
+  background: $background-extra-light;
+  transition: background 0.3s ease;
+  min-width: 200px;
+
+  &:focus {
+    background: $background-white;
+    outline: none;
+  }
+}
 
 .addeDatePicker {
   // container div for the main input
@@ -19,7 +37,9 @@
     display: inline-block;
 
     input {
-      @extend %body-font-styling;
+      @extend %input-default-styling;
+      text-indent: 16px;
+      width: 240px;
     }
   }  
 }
@@ -32,24 +52,37 @@
 
 .dateRangePicker-content {
     display: flex;
+}
 
+.input-wrapper {
+  position: relative;
+
+  > svg {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    > path {
+      fill: #888;
+    }
   }
-
+}
 
 // Range Picker
 .adde-date-range {
-  display: flex;
-  flex-direction: column;
-  width: 600px;
-  box-shadow: 0 2px 4px rgba(0,0,0, 0.2);
-
-  .dateRangePicker-content {
-    display: flex;
-  }
+  @extend %date-picker-dropdown;
 
   .dateRangePicker-quicklinks {
     padding: 6px 4px;
     border-bottom: $global-border-style;
+
+    .button-text {
+      color: $text-link;
+      min-width: 50px;
+
+      &:hover {
+        color: lighten($text-link-hover, 20%);
+      }
+    }
   }
 
   // Main Section of the Range Picker
@@ -62,20 +95,22 @@
       text-align: left;
       padding: $spacing-double;
 
+      // Start/End Date Label
       label  {
         @extend %body-font-styling;
         color: #666;
         display: inline-block;
-        font-weight: 600;
+        font-weight: 500;
         font-size: 12px;
-        margin-bottom: 2px;
+        margin-bottom: $spacing-default / 4;
 
       }
 
+      // Start/end Date inputs
       input {
-        @extend %body-font-styling;
         display: block;
         width: 100%;
+        @extend %input-default-styling;
       }
 
       .DayPickerInput,
@@ -97,6 +132,18 @@
         box-shadow: none;
         position: relative;
       }
+
+      .DayPicker-Day {
+        border-radius: 2px;
+      }
+
+      .DayPicker-Caption > div {
+        @extend %body-font-styling;
+      }
+
+      .DayPicker-Day--today {
+        color: #4A90E2;
+      }
     }
   }
 
@@ -115,14 +162,14 @@
 
 }
 
-.dateRangePicker-quicklinks {
-  padding-top: 8px;
-}
 
-.date-picker-wrapper {
-  padding: $spacing-double;
+// Date Picker Advanced
+.datepicker-query-search {
+  @extend %date-picker-dropdown;
+  padding: 0 0 12px 16px;
 
-  label  {
+
+  p {
     @extend %body-font-styling;
     color: #666;
     display: inline-block;
@@ -159,6 +206,12 @@
   margin: $spacing-triple 0 0;
 }
 
+.small {
+  font-size: 13px;
+  color: #666;
+  font-weight: 500;
+}
+
 .cta-footer {
   padding: 16px;
   text-align: right;
@@ -166,27 +219,35 @@
 
   button {
     margin-left: 8px;
+    margin: 0;
+
+    &.small {
+      font-size: $font-size-smaller;
+    }
+  }
+
+  .state-no-match {
+    display: none;
+
   }
 }
 
+// Suggested dropdown
+.react-autosuggest__suggestions-container:not(:empty) {
+  @extend %date-picker-dropdown;
 
-div.DayPicker-Day {
-  border-radius: 2px;
-}
+  ul {
+    padding: $spacing-default 0;
+    margin: 0;
+    list-style: none;
 
-div.DayPicker-Caption > div {
-  font-size: 14px;
-}
+    li {
+      padding: $spacing-default $spacing-double;
 
-div.DayPicker-Day--today {
-  color: #4A90E2;
-}
-
-.button-text {
-  color: #4A90E2;
-  min-width: 50px;
-  &:hover {
-    color: lighten(#4A90E2, 10%);
+      &:hover {
+        background: $background-hover;
+      }
+    }
   }
 }
 
@@ -220,10 +281,15 @@ li {
 }
 
 .header-dropdown {
-  padding: 0 24px;
+  padding: 0 16px;
   height: 100%;
   align-items: center;
   display: flex;
+  color: #ccc;
+
+  > span {
+    margin-right: 8px;
+  }
 }
 
 .context-chooser {
@@ -260,13 +326,18 @@ li {
   }
 }
 
-
-.sidebar {
-  background: #f3f3f3;
-  width: 300px;
+.home > div {
+  width: 100%;
 }
 
+
 .content {
-  padding: 24px;
+  padding: 12px 16px;
+  width: 100%;
+  border-bottom: 1px #ccc solid;
+}
+
+.state-empty p {
+  font-size: 16px;
 }
 
