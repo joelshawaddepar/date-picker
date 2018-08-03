@@ -53,7 +53,7 @@
       min-width: 50px;
 
       &:hover {
-        color: $text-link-hover;
+        color: lighten($text-link-hover, 20%);
       }
     }
   }

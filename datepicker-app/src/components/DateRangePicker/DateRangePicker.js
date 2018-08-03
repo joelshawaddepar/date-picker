@@ -35,7 +35,7 @@ export default class DateRangePicker extends React.Component {
         <div className="dateRangePicker-quicklinks">
           <button className="button-text">YTD</button>
           <button className="button-text">MTD</button>
-          <button className="button-text">WTD</button>
+          <button className="button-text">This Year</button>
         </div>
 
         <section className="body">
